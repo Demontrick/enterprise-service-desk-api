@@ -1,25 +1,26 @@
 # Enterprise Service Desk API
 
-## Overview
+## Project Overview
 
-Enterprise Service Desk API is a backend REST service built with Spring Boot that simulates a real IT support ticket management system used inside companies.
+Enterprise Service Desk API is a Spring Boot backend application that simulates an internal IT support ticket management system used in enterprise environments.
 
-The project demonstrates backend engineering fundamentals such as layered architecture, DTO design, exception handling, validation, and REST workflow management.
+The goal of this project is to demonstrate backend engineering practices such as REST API design, layered architecture, DTO usage, validation, and exception handling.
 
-This project was built as a proof-of-concept to demonstrate backend development skills relevant to Java enterprise environments.
+This project serves as a proof-of-concept demonstrating skills relevant for Java backend developer roles.
 
 ---
 
-## Business Problem
+## Business Use Case
 
-Companies need internal systems to track IT support issues such as:
+Organizations need systems to manage internal IT support requests such as:
 
-• System access problems
-• Software installation requests
+• Access issues
+• Software installation
 • Infrastructure incidents
 • Bug reports
+• Service requests
 
-This API simulates how enterprise service desks manage ticket lifecycle from creation to resolution.
+This API simulates how companies manage ticket lifecycle from creation to resolution.
 
 ---
 
@@ -30,26 +31,26 @@ Spring Boot
 Spring Data JPA
 Hibernate
 H2 Database
-Swagger / OpenAPI
+Swagger (OpenAPI)
 Maven
 
 ---
 
 ## Architecture
 
-The project follows standard enterprise backend structure:
+The project follows enterprise backend architecture principles:
 
 Controller → Service → Repository → Database
 
-Structure:
+Project structure:
 
 src/main/java/com/company/servicedesk
 
 controller → REST endpoints
 service → business logic
-repository → database access
-model → entities & enums
-dto → request/response objects
+repository → data access layer
+model → entities and enums
+dto → request and response models
 exception → global error handling
 
 ---
@@ -57,80 +58,63 @@ exception → global error handling
 ## Features
 
 Ticket Management:
+
 • Create support tickets
 • View all tickets
-• Get ticket by id
+• Get ticket by ID
 • Delete tickets
 
 Workflow Management:
-• Update ticket status (OPEN → IN_PROGRESS → RESOLVED → CLOSED)
+
+• Update ticket status
+(OPEN → IN_PROGRESS → RESOLVED → CLOSED)
 
 Engineering Practices:
-• DTO pattern
+
+• DTO pattern implementation
 • Global exception handling
 • Input validation
 • REST best practices
-• Layered architecture
+• Clean layered architecture
 
 ---
 
 ## API Endpoints
 
-### Get all tickets
-
 GET /api/tickets
+Returns all tickets
 
-Returns all tickets.
+POST /api/tickets
+Creates a new ticket
+
+PATCH /api/tickets/{id}/status
+Updates ticket workflow status
+
+GET /api/tickets/{id}
+Returns ticket by id
+
+DELETE /api/tickets/{id}
+Deletes ticket
 
 ---
 
-### Create ticket
+## Example Request
 
 POST /api/tickets
 
-Example request:
+Request body:
 
 {
-"title":"VPN not working",
-"description":"Cannot connect to company VPN",
+"title":"VPN connection issue",
+"description":"Unable to connect to corporate VPN",
 "priority":"HIGH"
 }
 
 ---
 
-### Get ticket by ID
+## Ticket Model
 
-GET /api/tickets/{id}
-
-Example:
-
-GET /api/tickets/1
-
----
-
-### Update ticket status
-
-PATCH /api/tickets/{id}/status?status=IN_PROGRESS
-
-Example:
-
-PATCH /api/tickets/1/status?status=RESOLVED
-
----
-
-### Delete ticket
-
-DELETE /api/tickets/{id}
-
-Example:
-
-DELETE /api/tickets/1
-
----
-
-## Data Models
-
-Ticket:
+Ticket fields:
 
 id → Long
 title → String
@@ -141,42 +125,31 @@ createdAt → Timestamp
 
 ---
 
-## Validation Rules
-
-Title:
-• Required
-• Cannot be empty
-
-Priority:
-• Must be LOW, MEDIUM, or HIGH
-
----
-
 ## Error Handling
 
-The API uses GlobalExceptionHandler to return consistent error responses.
-
-Example:
+Example error response:
 
 {
 "message":"Ticket not found with id: 99",
 "status":404,
-"timestamp":"2026-03-26T14:23"
+"timestamp":"2026-03-26"
 }
+
+Global exception handling ensures consistent API responses.
 
 ---
 
-## How to Run
+## How To Run Project
 
-Clone project:
+Clone repository:
 
-git clone <your repo link>
+git clone <your-repo-url>
 
-Navigate:
+Navigate to project:
 
 cd enterprise-service-desk-api
 
-Run:
+Run application:
 
 mvn spring-boot:run
 
@@ -184,53 +157,51 @@ mvn spring-boot:run
 
 ## API Documentation
 
-Swagger UI:
+Swagger UI available at:
 
 http://localhost:8080/swagger-ui.html
 
-Use Swagger to test endpoints directly.
+Use Swagger to test all endpoints.
 
 ---
 
 ## Design Decisions
 
 DTO Pattern:
-Used to separate API contract from database entities.
+Used to separate persistence layer from API contracts.
 
-Global Exception Handling:
-Ensures consistent API error responses.
+Global Exception Handler:
+Provides consistent API error responses.
 
 Status Workflow Endpoint:
-Added PATCH endpoint to simulate real service desk lifecycle management.
+Simulates real enterprise ticket lifecycle management.
 
 Layered Architecture:
 Improves maintainability and scalability.
 
 ---
 
-## Future Improvements (optional)
+## Possible Improvements
 
-Authentication (JWT)
-Role based access
+JWT Authentication
+Role based authorization
 PostgreSQL integration
-Docker containerization
+Docker deployment
 Unit testing
 
 ---
 
-## What This Project Demonstrates
+## Skills Demonstrated
 
-Understanding of:
-
-REST API development
-Spring Boot architecture
-Database persistence
-Exception handling
-Backend project structure
-Enterprise coding practices
+REST API Development
+Spring Boot Backend Development
+Database Integration
+Exception Handling
+Backend Architecture Design
+Enterprise Coding Practices
 
 ---
 
 ## Author
 
-Java Backend Developer candidate demonstrating enterprise backend development skills.
+Backend Developer Portfolio Project demonstrating Java Spring Boot engineering capabilities.
