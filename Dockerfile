@@ -6,12 +6,11 @@ COPY .mvn ./.mvn
 COPY pom.xml .
 COPY src ./src
 
-RUN sed -i 's/\r$//' mvnw
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN sed -i 's/\r$//' mvnw && chmod +x mvnw && sh mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
+
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
